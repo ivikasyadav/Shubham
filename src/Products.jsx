@@ -15,6 +15,9 @@ import normal1 from './assets/product/winder/winder3.png';
 import normal2 from './assets/product/spiderman.jpg';
 import { useEffect, useState } from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+
 const products = [
     { image: winder1, title: 'Charger Winder' },
     { image: medal1, title: 'Medal Holder' },
@@ -25,42 +28,90 @@ const products = [
 ];
 
 const Products = () => {
+    const extendedProducts = [...products, products[0]]; // Add first product at the end
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [isTransitioning, setIsTransitioning] = useState(true);
 
     useEffect(() => {
-        const randomDelay = Math.random() * (3000 - 1500) + 1500;
-        const timeout = setTimeout(() => {
-            setCurrentIndex((prev) => (prev + 1) % products.length);
-        }, randomDelay);
+        // Reset transition for seamless loop
+        if (!isTransitioning && currentIndex === 0) {
+            const timeout = setTimeout(() => {
+                setIsTransitioning(true);
+            }, 50);
+            return () => clearTimeout(timeout);
+        }
+    }, [isTransitioning, currentIndex]);
 
-        return () => clearTimeout(timeout);
-    }, [currentIndex]);
+    const handleNext = () => {
+        setIsTransitioning(true);
+        setCurrentIndex((prev) => prev + 1);
+    };
 
-    const currentProduct = products[currentIndex];
+    const handlePrev = () => {
+        setIsTransitioning(true);
+        if (currentIndex === 0) {
+            setCurrentIndex(extendedProducts.length - 2);
+        } else {
+            setCurrentIndex((prev) => prev - 1);
+        }
+    };
+
 
     return (
       
         <section id="products" className="w-full py-20 bg-black min-h-screen">
             <div className="container mx-auto ">
-                <h2 className="text-5xl font-bold text-center mb-16 text-white bg-clip-text text-transparent">
+                <h2 className="text-5xl font-bold text-center mb-16 text-white bg-clip-text">
                     My Product
                 </h2>
+                <div className="w-full relative mx-auto mb-20">
+                    <div className="backdrop-blur-sm rounded-3xl p-8 shadow-2xl shadow-purple-500/20 transition-all duration-500 hover:shadow-purple-500/30 hover:shadow-3xl border border-purple-500/20">
+                            <div className="relative w-full overflow-hidden h-[500px] rounded-2xl">
+                                <div
+                                    className={`flex w-full h-full ${isTransitioning ? 'transition-transform duration-700 ease-in-out' : ''
+                                        }`}
+                                    style={{
+                                        transform: `translateX(-${currentIndex * 100}%)`,
+                                    }}
+                                    onTransitionEnd={() => {
+                                        if (currentIndex === extendedProducts.length - 1) {
+                                            setIsTransitioning(false);
+                                            setCurrentIndex(0);
+                                        }
+                                    }}
+                                >
+                                    {extendedProducts.map((product, index) => (
+                                        <img
+                                            key={index}
+                                            src={product.image}
+                                            alt={product.title}
+                                            className="w-full flex-shrink-0 object-contain h-[500px]"
+                                        />
+                                    ))}
+                                </div>
 
-                <div className="w-full  mx-auto mb-20">
-                    <div className="bg-slate-800/50 backdrop-blur-sm rounded-3xl p-8 shadow-2xl shadow-purple-500/20 transition-all duration-500 hover:shadow-purple-500/30 hover:shadow-3xl border border-purple-500/20">
-                        <div className="relative overflow-hidden rounded-2xl bg-white">
-                            <img
-                                src={currentProduct.image}
-                                alt={currentProduct.title}
-                                className="w-full h-[500px] object-contain transition-all duration-700 ease-in-out"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-purple-600/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
-                        </div>
-                        <h3 className="text-2xl font-bold mt-6 text-center text-purple-300">
-                            {currentProduct.title}
-                        </h3>
+                                <button
+                                    onClick={handlePrev}
+                                    className="absolute left-4 top-1/2 flex justify-center items-center transform -translate-y-1/2  text-white p-1 h-12 w-12 rounded-full bg-gray-500 rotate-180 "
+                                >
+                                <FontAwesomeIcon icon={faArrowRight} />
+                                </button>
+                                <button
+                                    onClick={handleNext}
+                                className="absolute right-4 bg-gray-500 top-1/2 flex justify-center items-center transform -translate-y-1/2 p-1 h-12 w-12    text-white px-4 py-2 rounded-full  "
+                                >
+                                <FontAwesomeIcon icon={faArrowRight} />
+                                </button>
+                            </div>
+
+                            <h3 className="text-2xl font-bold mt-6 text-center text-purple-300">
+                                {products[currentIndex % products.length].title}
+                            </h3>
+                        {/* </div> */}
+
                     </div>
                 </div>
+
 
                 <div className="relative max-w-7xl mx-auto">
               
@@ -121,15 +172,18 @@ const Products = () => {
                             </div>
                         </div>
 
-                        <div className="col-span-3 row-span-3 group relative overflow-hidden rounded-2xl bg-slate-800 shadow-lg shadow-yellow-500/20 transition-all duration-500 hover:shadow-yellow-500/40 hover:shadow-xl hover:-translate-y-2 hover:scale-105">
-                            <img
+                        <div>
+                            {/* <img
                                 src={portrait3}
                                 alt="Portrait 3"
                                 className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-110"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-br from-yellow-600/80 to-orange-600/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <span className="text-white font-bold text-xl uppercase tracking-wider drop-shadow-lg">3D PRINTING</span>
+                            /> */}
+                            <div className="w-full h-full bg-black ">
+
                             </div>
+                            {/* <div className="absolute inset-0 bg-gradient-to-br from-yellow-600/80 to-orange-600/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <span className="text-white font-bold text-xl uppercase tracking-wider drop-shadow-lg">3D PRINTING</span>
+                            </div> */}
                         </div>
 
                         <div className="col-span-3 row-span-3 group relative overflow-hidden rounded-2xl bg-slate-800 shadow-lg shadow-red-500/20 transition-all duration-500 hover:shadow-red-500/40 hover:shadow-xl hover:-translate-y-2 hover:scale-105">
@@ -143,7 +197,7 @@ const Products = () => {
                             </div>
                         </div>
 
-                        <div className="col-span-6 row-span-2 group relative overflow-hidden rounded-2xl bg-slate-800 shadow-lg shadow-indigo-500/20 transition-all duration-500 hover:shadow-indigo-500/40 hover:shadow-xl hover:-translate-y-2 hover:scale-105">
+                        <div className="col-span-6 h-full  row-span-2 group relative overflow-hidden rounded-2xl bg-slate-800 shadow-lg shadow-indigo-500/20 transition-all duration-500 hover:shadow-indigo-500/40 hover:shadow-xl hover:-translate-y-2 hover:scale-105">
                             <img
                                 src={normal2}
                                 alt="Landscape 2"
@@ -224,11 +278,11 @@ const Products = () => {
                             { src: portrait2, label: "Design", colors: "from-pink-600/80 to-purple-600/60" },
                             { src: gif2, label: "Motion", colors: "from-green-600/80 to-blue-600/60" },
                             { src: normal1, label: "Creation", colors: "from-purple-600/80 to-blue-600/60" },
-                            { src: portrait3, label: "Art", colors: "from-yellow-600/80 to-orange-600/60" },
+                            // { src: portrait3, label: "Art", colors: "from-yellow-600/80 to-orange-600/60" },
                             { src: portrait4, label: "Craft", colors: "from-red-600/80 to-pink-600/60" },
                             { src: normal2, label: "Innovation", colors: "from-indigo-600/80 to-purple-600/60" }
                         ].map((item, index) => (
-                            <div key={index} className="h-64 group relative overflow-hidden rounded-2xl bg-slate-800 shadow-lg transition-all duration-500 hover:-translate-y-2 hover:scale-105">
+                            <div key={index} className="h-full group relative overflow-hidden rounded-2xl bg-slate-800 shadow-lg transition-all duration-500 hover:-translate-y-2 hover:scale-105">
                                 <img src={item.src} alt={item.label} className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110" />
                                 <div className={`absolute inset-0 bg-gradient-to-br ${item.colors} opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center`}>
                                     <span className="text-white font-bold text-lg uppercase tracking-wider">{item.label}</span>

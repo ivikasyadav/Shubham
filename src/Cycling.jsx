@@ -34,7 +34,7 @@ const Cycling = () => {
                   </div>
               </div>
 
-              <div className="rounded-lg overflow-hidden shadow-lg flex  bg-gray-900 hover:shadow-2xl transition-shadow duration-300  flex-col items-center">
+              <div className="rounded-lg overflow-hidden shadow-lg flex  hover:shadow-2xl transition-shadow duration-300  flex-col items-center">
                   <img
                       src={solo}
                       alt="Cycling Portrait"
@@ -46,7 +46,7 @@ const Cycling = () => {
                   </div>
               </div>
 
-              <div className="rounded-lg overflow-hidden shadow-lg bg-gray-900 hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center">
+              <div className="rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center">
                   <img
                       src={ss}
                       alt="Cycling Portrait"
