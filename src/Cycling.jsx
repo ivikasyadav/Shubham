@@ -17,8 +17,8 @@ const Cycling = () => {
                       className="w-full h-64 object-cover"
                   />
                   <div className="p-4">
-                      <h3 className="text-xl font-semibold mb-1">Lorem, ipsum.</h3>
-                      <p className="text-gray-400 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                      {/* <h3 className="text-xl font-semibold mb-1">Lorem, ipsum.</h3>
+                      <p className="text-gray-400 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p> */}
                   </div>
               </div>
 
@@ -29,20 +29,20 @@ const Cycling = () => {
                       className="w-full h-64 object-cover"
                   />
                   <div className="p-4">
-                      <h3 className="text-xl font-semibold mb-1">Lorem, ipsum.</h3>
-                      <p className="text-gray-400 text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                      {/* <h3 className="text-xl font-semibold mb-1">Lorem, ipsum.</h3>
+                      <p className="text-gray-400 text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p> */}
                   </div>
               </div>
 
-              <div className="rounded-lg overflow-hidden shadow-lg bg-gray-900 hover:shadow-2xl transition-shadow duration-300  flex flex-col items-center">
+              <div className="rounded-lg overflow-hidden shadow-lg flex  bg-gray-900 hover:shadow-2xl transition-shadow duration-300  flex-col items-center">
                   <img
                       src={solo}
                       alt="Cycling Portrait"
                       className="w-full max-w-xs h-[500px] object-cover"
                   />
                   <div className="p-4 text-center">
-                      <h3 className="text-xl font-semibold mb-1">Lorem, ipsum.</h3>
-                      <p className="text-gray-400 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                      {/* <h3 className="text-xl font-semibold mb-1">Lorem, ipsum.</h3>
+                      <p className="text-gray-400 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p> */}
                   </div>
               </div>
 
@@ -53,8 +53,8 @@ const Cycling = () => {
                       className="w-full max-w-xs h-[500px] object-cover"
                   />
                   <div className="p-4 text-center">
-                      <h3 className="text-xl font-semibold mb-1">Lorem, ipsum.</h3>
-                      <p className="text-gray-400 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique?</p>
+                      {/* <h3 className="text-xl font-semibold mb-1">Lorem, ipsum.</h3>
+                      <p className="text-gray-400 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique?</p> */}
                   </div>
               </div>
           </div>

@@ -20,19 +20,11 @@ import Cycling from './Cycling';
 import { Routes, Route, Link } from 'react-router-dom';
 import Navbar from './Navbar';
 
-
 const App = () => {
   return (
-    <div className="min-h-screen bg-black text-white font-inter p-4 sm:p-8 md:p-12 lg:p-16 flex justify-center items-center">
-      <div className="max-w-7xl w-full bg-black rounded-lg shadow-lg overflow-hidden">
-
-
-
-
-        <main className="flex flex-col items-center  px-6 sm:px-10 md:px-16 lg:px-20 h-screen ">
-
-
-
+    <div className="min-h-screen bg-black text-white font-inter px-1 py-4 sm:p md:p-12 lg:p-16 flex justify-center items-center">
+      <div className="w-full max-w-7xl bg-black rounded-lg shadow-lg overflow-hidden min-h-screen">
+        <main className="flex flex-col items-center sm:px-16 lg:px-20">
           <Navbar />
           <Routes>
             <Route path='/' element={<Home />} />
@@ -41,13 +33,6 @@ const App = () => {
             <Route path='/contact' element={<Contact />} />
             <Route path='/cycling' element={<Cycling />} />
           </Routes>
-
-
-
-
-
-
-
         </main>
       </div>
     </div>
