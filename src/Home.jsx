@@ -5,9 +5,8 @@ const Home = () => {
   return (
     <section
       id="home"
-      className="flex flex-col md:flex-row items-center justify-between px-4 sm:px-6 lg:px-16 py-10 md:py-20 w-full"
+      className="flex flex-col md:flex-row mt-15 lg:mt-0 items-center justify-between px-4 sm:px-6 lg:px-16 py-10 md:py-20 w-full"
     >
-      {/* Left Text Content */}
       <div className="w-full md:w-1/2 text-center md:text-left mb-10 md:mb-0">
         <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4">
           Hello, I Am <br />
@@ -20,7 +19,6 @@ const Home = () => {
         </p>
       </div>
 
-      {/* Right Image */}
       <div className="w-full md:w-1/2 flex justify-center md:justify-end">
         <img
           src={personal}
