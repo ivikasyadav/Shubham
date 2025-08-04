@@ -5,7 +5,7 @@ import React from 'react'
 // import hanger from './assets/branding/hanger.png'
 
 // import img1 from './assets/promotion/pro1.JPG'
-import img2 from './assets/promotion/pro2.JPG'
+import img2 from './assets/promotion/pro2.jpg'
 import img3 from './assets/promotion/pro3.jpg'
 // import img4 from './assets/promotion/pro4.jpg'
 import img5 from './assets/promotion/pro5.jpg'
@@ -81,13 +81,13 @@ const Promotion = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 px-4 mt-10 sm:px-0">
 
         <div className="flex flex-col gap-10">
-          <div className="bg-gray-900 py-4 rounded-lg shadow-lg">
+          <div className="py-4 rounded-lg shadow-lg">
             <video
               autoPlay
               muted
               loop
               playsInline
-              className="w-full h-[250px] object-cover rounded-md"
+              className="w-full h-[250px] object-contain rounded-md"
             >
               <source src={video1} />
 
