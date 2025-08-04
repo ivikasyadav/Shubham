@@ -11,7 +11,7 @@ const Contact = () => {
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur vitae ex quod, eaque laborum dolorem optio quaerat excepturi neque est omnis, inventore magnam rerum illum!
               </p>
               <div className="text-gray-300 space-y-2 text-sm">
-                  <p><strong>Email:</strong> abc@gmail.com</p>
+                  <p><strong>Email:</strong> abcd@gmail.com</p>
                   <p><strong>Phone:</strong> +91 8286477202</p>
                   <p><strong>Location:</strong> Mumbai, India</p>
               </div>
