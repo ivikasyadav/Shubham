@@ -4,6 +4,7 @@ import medal2 from './assets/product/medal/medal2.jpg';
 import winder1 from './assets/product/winder/winder1.png';
 import winder2 from './assets/product/winder/winder2.png';
 import lamp from './assets/product/lamp.jpg';
+import Medal from './assets/product/Medal.png';
 
 import gif1 from './assets/product/giv/handskakegif.gif';
 import gif2 from './assets/product/giv/lampgif.gif';
@@ -13,7 +14,7 @@ import portrait3 from './assets/product/joker.jpg';
 import portrait4 from './assets/product/joker.jpg';
 import normal1 from './assets/product/winder/winder3.png';
 import normal2 from './assets/product/spiderman.jpg';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -28,33 +29,48 @@ const products = [
 ];
 
 const Products = () => {
-    const extendedProducts = [...products, products[0]]; // Add first product at the end
+    const extendedProducts = [...products, products[0]];
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(true);
+    const intervalRef = useRef(null);
+
+    const startAutoSlide = () => {
+        clearInterval(intervalRef.current);
+        intervalRef.current = setInterval(() => {
+            setCurrentIndex(prevIndex => {
+                const nextIndex = prevIndex + 1;
+                if (nextIndex >= extendedProducts.length) {
+                    setIsTransitioning(false);
+                    return 0;
+                }
+                return nextIndex;
+            });
+        }, 1700);
+    };
+
 
     useEffect(() => {
-        // Reset transition for seamless loop
-        if (!isTransitioning && currentIndex === 0) {
-            const timeout = setTimeout(() => {
-                setIsTransitioning(true);
-            }, 50);
-            return () => clearTimeout(timeout);
+        if (isTransitioning) {
+            startAutoSlide();
         }
-    }, [isTransitioning, currentIndex]);
+        return () => clearInterval(intervalRef.current);
+    }, [isTransitioning]);
+
 
     const handleNext = () => {
+        clearInterval(intervalRef.current);
         setIsTransitioning(true);
-        setCurrentIndex((prev) => prev + 1);
+        setCurrentIndex(prev => prev + 1);
+        startAutoSlide(); 
     };
 
     const handlePrev = () => {
+        clearInterval(intervalRef.current);
         setIsTransitioning(true);
-        if (currentIndex === 0) {
-            setCurrentIndex(extendedProducts.length - 2);
-        } else {
-            setCurrentIndex((prev) => prev - 1);
-        }
+        setCurrentIndex(prev => (prev === 0 ? extendedProducts.length - 2 : prev - 1));
+        startAutoSlide(); 
     };
+
 
 
     return (
@@ -172,19 +188,7 @@ const Products = () => {
                             </div>
                         </div>
 
-                        <div>
-                            {/* <img
-                                src={portrait3}
-                                alt="Portrait 3"
-                                className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-110"
-                            /> */}
-                            <div className="w-full h-full bg-black ">
-
-                            </div>
-                            {/* <div className="absolute inset-0 bg-gradient-to-br from-yellow-600/80 to-orange-600/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <span className="text-white font-bold text-xl uppercase tracking-wider drop-shadow-lg">3D PRINTING</span>
-                            </div> */}
-                        </div>
+                       
 
                         <div className="col-span-3 row-span-3 group relative overflow-hidden rounded-2xl bg-slate-800 shadow-lg shadow-red-500/20 transition-all duration-500 hover:shadow-red-500/40 hover:shadow-xl hover:-translate-y-2 hover:scale-105">
                             <img
@@ -205,6 +209,13 @@ const Products = () => {
                             />
                             <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/80 to-purple-600/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                 <span className="text-white font-bold text-xl uppercase tracking-wider drop-shadow-lg">3D SPIDERMAN</span>
+                            </div>
+                        </div>
+
+                        <div className="col-span-6 h-48 group relative overflow-hidden rounded-2xl  shadow-lg transition-all duration-500 hover:-translate-y-2 hover:scale-105">
+                            <img src={Medal} alt="Innovation" className="w-full h-full object-contain transition-all duration-500 group-hover:scale-110" />
+                            <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/80 to-purple-600/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <span className="text-white font-bold text-lg uppercase tracking-wider">Medal Holder</span>
                             </div>
                         </div>
 
@@ -269,6 +280,7 @@ const Products = () => {
                                 <span className="text-white font-bold text-lg uppercase tracking-wider">3D PRINTING</span>
                             </div>
                         </div>
+                        
                     </div>
 
                     <div className="grid md:hidden grid-cols-1 gap-4">
@@ -280,7 +292,8 @@ const Products = () => {
                             { src: normal1, label: "Creation", colors: "from-purple-600/80 to-blue-600/60" },
                             // { src: portrait3, label: "Art", colors: "from-yellow-600/80 to-orange-600/60" },
                             { src: portrait4, label: "Craft", colors: "from-red-600/80 to-pink-600/60" },
-                            { src: normal2, label: "Innovation", colors: "from-indigo-600/80 to-purple-600/60" }
+                            { src: normal2, label: "Innovation", colors: "from-indigo-600/80 to-purple-600/60" },
+                            { src: Medal, label: "Medal", colors: "from-indigo-600/80 to-purple-600/60" }
                         ].map((item, index) => (
                             <div key={index} className="h-full group relative overflow-hidden rounded-2xl bg-slate-800 shadow-lg transition-all duration-500 hover:-translate-y-2 hover:scale-105">
                                 <img src={item.src} alt={item.label} className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110" />
