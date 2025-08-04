@@ -1,7 +1,7 @@
     import React from 'react';
     
     import img1 from './assets/cycling/cy1.jpg'
-    import img2 from './assets/cycling/cy2.jpg'
+import img2 from './assets/cycling/cy2.jpg';
     import img3 from './assets/cycling/cy3.jpg'
     import img4 from './assets/cycling/cy4.jpg'
     import img5 from './assets/cycling/cy5.jpg'
